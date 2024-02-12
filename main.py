@@ -1,7 +1,3 @@
-import sqlite3
-
-from create_students_bd import create_db
-from students_faker_data import insert_data_to_db
 from students_query import execute_query
 
 
@@ -147,18 +143,17 @@ WHERE subject_id = subj.id
 """
 
 if __name__ == "__main__":
-    create_db()
-    insert_data_to_db()
+  
     
-    print(execute_query(sql_1))  #[(39, 'Shannon Mitchell', 68.0), (9, 'Amy Ballard', 65.56), 
-    print(execute_query(sql_2)) #[(16, 'Laura Wiggins', 84.5)]
-    print(execute_query(sql_3)) #[('be', 53.83), ('by', 53.07), ('support', 49.25)]
-    print(execute_query(sql_4)) #[(49.59,)]
-    print(execute_query(sql_5)) #[(7, 'his'), (5, 'mother')]
-    print(execute_query(sql_6)) #[(16, 'Jade Tran'), (17, 'Johnathan Stewart'), (18, 'Jeffery King'),...
-    print(execute_query(sql_7))  #[('William Howard', 100), ('Regina Henry', 96), ('Shane Acevedo', 91),...
-    print(execute_query(sql_8))  #[(52.86,)]
-    print(execute_query(sql_9))  #[('his',), ('kid',), ('hand',),...
-    print(execute_query(sql_10))  #[('or',), ('kid',)]
-    print(execute_query(sql_11))  #[(35.67,)]
-    print(execute_query(sql_12))  #[('Francis Wilson', 52), ('David Pacheco', 71), ('David Pacheco', 30)]
+    print(execute_query(sql_1))  
+    print(execute_query(sql_2)) 
+    print(execute_query(sql_3))
+    print(execute_query(sql_4)) 
+    print(execute_query(sql_5)) 
+    print(execute_query(sql_6)) 
+    print(execute_query(sql_7))  
+    print(execute_query(sql_8))  
+    print(execute_query(sql_9))  
+    print(execute_query(sql_10)) 
+    print(execute_query(sql_11))  
+    print(execute_query(sql_12))  
