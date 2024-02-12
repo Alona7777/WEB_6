@@ -22,7 +22,9 @@
     LIMIT 1;
 
     -- 3. Знайти середній бал у групах з певного предмета.
-    SELECT g.name AS group_name,
+    SELECT 
+        subj.name,
+        g.name AS group_name,
         ROUND(AVG(grade), 2) AS average_grade
     FROM grades gr
     JOIN students s ON gr.student_id = s.id
@@ -38,6 +40,7 @@
     
     -- 5. Знайти які курси читає певний викладач.
     SELECT
+        t.fullname,
         s.id,
         s.name
     FROM subjects s
@@ -56,6 +59,7 @@
 
     --7. Знайти оцінки студентів у окремій групі з певного предмета.
     SELECT
+        subj.name,
         s.fullname,
         gr.grade
     FROM grades gr
@@ -67,6 +71,7 @@
 
     -- 8.Знайти середній бал, який ставить певний викладач зі своїх предметів.
     SELECT
+        t.fullname,
         ROUND(AVG(grade), 2) AS average_grade
     FROM grades gr
     JOIN subjects subj ON gr.subject_id = subj.id
@@ -75,6 +80,7 @@
    
     -- 9. Знайти список курсів, які відвідує студент.
     SELECT DISTINCT 
+        s.fullname,
         subj.name AS subject_name
     FROM students s
     JOIN grades gr ON s.id = gr.student_id
@@ -83,6 +89,8 @@
    
     -- 10. Список курсів, які певному студенту читає певний викладач.
     SELECT DISTINCT 
+        t.fullname,
+        s.fullname,
         subj.name AS subject_name
     FROM students s
     JOIN grades gr ON s.id = gr.student_id
@@ -92,6 +100,8 @@
 
     -- 11. Середній бал, який певний викладач ставить певному студентові.
     SELECT
+        t.fullname,
+        s.fullname,
         ROUND(AVG(grade), 2) AS average_grade
     FROM students s
     JOIN grades gr ON s.id = gr.student_id
@@ -101,6 +111,7 @@
 
     -- 12.Оцінки студентів у певній групі з певного предмета на останньому занятті.
     SELECT
+        subj.name,
         s.fullname,
         gr.grade
     FROM grades gr
