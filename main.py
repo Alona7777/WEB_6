@@ -30,7 +30,9 @@ LIMIT 1;
 
 # 3. Знайти середній бал у групах з певного предмета.
 sql_3 = """
-SELECT g.name AS group_name,
+ SELECT 
+    subj.name,
+    g.name AS group_name,
     ROUND(AVG(grade), 2) AS average_grade
 FROM grades gr
 JOIN students s ON gr.student_id = s.id
@@ -50,11 +52,12 @@ FROM grades;
 # 5. Знайти які курси читає певний викладач.
 sql_5 = """
 SELECT
+    t.fullname,
     s.id,
     s.name
 FROM subjects s
 JOIN teachers t ON t.id = s.teacher_id
-where s.teacher_id = 4
+where s.teacher_id = 3
 GROUP BY s.name;
 """
 
@@ -72,19 +75,21 @@ GROUP BY s.id;
 # 7. Знайти оцінки студентів у окремій групі з певного предмета.
 sql_7 = """
 SELECT
+    subj.name,
     s.fullname,
     gr.grade
 FROM grades gr
 JOIN students s ON gr.student_id = s.id
 JOIN groups g ON s.group_id = g.id
 JOIN subjects subj ON gr.subject_id = subj.id
-WHERE g.id = 3 AND subj.id = 7
+WHERE g.id = 3 AND subj.id = 3
 ORDER BY gr.grade DESC;
 """
 
 # 8.Знайти середній бал, який ставить певний викладач зі своїх предметів.
 sql_8 = """
 SELECT
+    t.fullname,
     ROUND(AVG(grade), 2) AS average_grade
 FROM grades gr
 JOIN subjects subj ON gr.subject_id = subj.id
@@ -95,6 +100,7 @@ WHERE t.id = 5;
 # 9. Знайти список курсів, які відвідує студент.
 sql_9 = """
 SELECT DISTINCT 
+    s.fullname,
     subj.name AS subject_name
 FROM students s
 JOIN grades gr ON s.id = gr.student_id
@@ -105,6 +111,8 @@ WHERE s.id = 7;
 # 10. Список курсів, які певному студенту читає певний викладач.
 sql_10 = """
 SELECT DISTINCT 
+    t.fullname,
+    s.fullname,
     subj.name AS subject_name
 FROM students s
 JOIN grades gr ON s.id = gr.student_id
@@ -116,6 +124,8 @@ WHERE s.id = 30 AND t.id = 3;
 # 11. Середній бал, який певний викладач ставить певному студентові.
 sql_11 = """
 SELECT
+    t.fullname,
+    s.fullname,
     ROUND(AVG(grade), 2) AS average_grade
 FROM students s
 JOIN grades gr ON s.id = gr.student_id
@@ -127,6 +137,7 @@ WHERE s.id = 7 AND t.id = 4;
 # 12.Оцінки студентів у певній групі з певного предмета на останньому занятті.
 sql_12 = """
 SELECT
+    subj.name,
     s.fullname,
     gr.grade
 FROM grades gr
